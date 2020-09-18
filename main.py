@@ -1,5 +1,6 @@
 import re
 import string
+import random
 
 class Game:
     @staticmethod
@@ -81,6 +82,12 @@ class Game:
         else:
             return False
 
+    @staticmethod
+    def machine_move():
+        moves = list(range(1, 11))
+        coordinate = tuple(random.choices(moves, k = 2))
+        return coordinate
+
 
 class Board:
     def __init__(self, columns, rows):
@@ -138,7 +145,6 @@ class Board:
 
 
 class Player:
-
     def __init__(self):
         self.name = input("Player name: ").upper()
         self.player_ships = {}
@@ -175,7 +181,7 @@ class Player:
                 self.player_ships[s] = temp_coordinates
             player_board.set_pegs(self.player_ships[s])
 
-    def perform_shot(self, player_tracking, target_board, target_ships): #maybe needs a check if shot has been performed previously
+    def perform_shot(self, player_tracking, target_board, target_ships, computer_coord = None):
         '''
             Calls for user input to ger shot coordinates and checks if
             the coordinates are inside target_ships
@@ -183,7 +189,15 @@ class Player:
         while True:
             print(f"Insert one coordinate (eg: 1, 1) to perform a shot")
             try:
-                coordinate = tuple(map(int, input().split(",")))
+
+                if computer_coord == None:
+                    coordinate = tuple(map(int, input().split(",")))
+                else:
+                    coordinate = computer_coord
+                    if coordinate in self.player_moves: #to avoid infinite loop when a random choice generates same coordinates
+                        print(f"DUPLICATE RANDOM CHOICE!!!!!!!!!!! {coordinate}")
+                        coordinate = Game.machine_move()
+
                 if Game.check_input(coordinate):
                     #checks if shot was executed in previous moves
                     if coordinate not in self.player_moves:
@@ -215,7 +229,8 @@ class Player:
 
     def auto_boat_input(self, ships, player_board):
         '''
-            Method to automatically input boats for testing the game quicker
+            Method to automatically input boats for testing and for
+            inputting computers boats.
         '''
         self.player_ships = ships
 

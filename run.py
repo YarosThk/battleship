@@ -1,4 +1,5 @@
 import string
+import random
 from main import Game, Board, Player
 
 
@@ -21,8 +22,13 @@ player2_ships = {"Carrier": [(3, 5), (3, 6), (3, 4), (3, 3), (3, 2)],
                 "Submarine" : [(1, 5), (1, 6), (1, 7)],
                 "Destroyer" : [(6,8), (6,9)]}
 
+def machine_move():
+    moves = list(range(1, 11))
+    coordinate = tuple(random.choices(moves, k = 2))
+    return coordinate
 
-def battleship(mode):
+
+def battleship():
     '''
         Functions that set ups the game and runs it.
     '''
@@ -35,14 +41,16 @@ def battleship(mode):
     player2_board = Board(rows, columns)
     player2_tracking = Board(rows, columns) #board to mark shots
 
-    #quickly creates boats for easier testing
-    #player.auto_boat_input(player_ships, player_board)
-    player.define_ships(player_board, ships_settings)
 
-    if mode == 1:
-        player2.auto_boat_input(player2_ships, player2_board)
-    else:
-        player2.define_ships(player2_board, ships_settings)
+    '''
+        Comment out (#) player.define_ships, and uncomment player.auto_boat_input
+        to automate ta ships set up for quick testing. Leave player2.auto_boat_input
+        as is.
+    '''
+    player.define_ships(player_board, ships_settings)
+    #player.auto_boat_input(player_ships, player_board)
+    player2.auto_boat_input(player2_ships, player2_board)
+
 
     #turn taking
     turn = 1
@@ -69,14 +77,15 @@ def battleship(mode):
         elif turn == 0: #player2 round
             print(f"{player2.name}'s move")
 
-            print(f"{player2.name}'s TRACKING BOARD")
-            player2_tracking.render_board()
+            #print(f"{player2.name}'s TRACKING BOARD")
+            #player2_tracking.render_board()
 
-            print(f"{player2.name}'s PRIMARY BOARD")
-            player2_board.render_board()
+            #print(f"{player2.name}'s PRIMARY BOARD")
+            #player2_board.render_board()
 
-            player2.perform_shot(player2_tracking, player_board, player.player_ships)
-            player2_tracking.render_board()
+
+            player2.perform_shot(player2_tracking, player_board, player.player_ships, Game.machine_move())
+            #player2_tracking.render_board()
 
             if Game.player_status(player.player_ships):
                 print(f"GAME OVER, {player2.name} WINS")
@@ -85,18 +94,10 @@ def battleship(mode):
 
 
 if __name__ == "__main__":
-    print("Pick game mode 1- 1vMachine or 2- 1v1:")
-    while True:
-        mode = input()
-        try:
-            mode = int(mode)
-        except ValueError:
-            print("Write numeric value 1 or 2!")
-            continue
-        if mode == 1: #versus a machine
-            battleship(mode)
-        elif mode == 2: #versus another player
-            battleship(mode)
-        else:
-            print("Only 1 or 2 are valid inputs!")
-            continue
+    battleship()
+    '''
+    FOR THE NEXT RUN REMEMBER TO RECORD AND RETURN (PRINT) ALL PLAYER MOVES TO
+    CHECK IF COMPUTER HAS THE SAME AMOUNT OF MOVES RECORDED AS THE PLAYER.
+
+    Analyse the control flow when computer repeats random choice!
+    '''
