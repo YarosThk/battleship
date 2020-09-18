@@ -22,11 +22,6 @@ player2_ships = {"Carrier": [(3, 5), (3, 6), (3, 4), (3, 3), (3, 2)],
                 "Submarine" : [(1, 5), (1, 6), (1, 7)],
                 "Destroyer" : [(6,8), (6,9)]}
 
-def machine_move():
-    moves = list(range(1, 11))
-    coordinate = tuple(random.choices(moves, k = 2))
-    return coordinate
-
 
 def battleship():
     '''
@@ -76,13 +71,6 @@ def battleship():
 
         elif turn == 0: #player2 round
             print(f"{player2.name}'s move")
-
-            #print(f"{player2.name}'s TRACKING BOARD")
-            #player2_tracking.render_board()
-
-            #print(f"{player2.name}'s PRIMARY BOARD")
-            #player2_board.render_board()
-
 
             player2.perform_shot(player2_tracking, player_board, player.player_ships, Game.machine_move())
             #player2_tracking.render_board()
