@@ -4,7 +4,6 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-* [Getting Started](#getting-started)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -13,10 +12,6 @@
 
 ## About the project
 A small Battleship game project as a way to introduce myself into the object oriented programming.
-
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
