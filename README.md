@@ -1,9 +1,17 @@
 <h3 align="center">BATTLESHIP</h3>
 
- 
-#TABLE OF CONTENTS
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-##About the project
+* [About the Project](#about-the-project)
+* [Getting Started](#getting-started)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+
+
+## About the project
 A small Battleship game project as a way to introduce myself into the object oriented programming.
 
 ## Getting Started
