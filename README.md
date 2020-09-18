@@ -6,6 +6,7 @@
 * [About the Project](#about-the-project)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
+* [Code set up before running](#Code-set-up-before-running)
 * [Usage](#usage)
 * [License](#license)
 
