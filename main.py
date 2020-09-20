@@ -120,22 +120,20 @@ class Board:
         '''
         for p in ship:
             pos = list(self.board_array[p[1]][1][::2])
-            pos[p[0]-1] = "#"
-
+            pos[p[0]-1] = "◘" #hope this symbol will work
             pos = " ".join(pos)
-
             self.board_array[p[1]][1] = pos
 
         self.render_board()
 
     def paint_shot(self, guess, shot):
         '''
-            Marks X or M if hit or miss respectively
+            Marks X or ○ if hit or miss respectively
         '''
         if guess == True:
             icon = "X"
         elif guess == False:
-            icon = "M"
+            icon = "○"
 
         pos = list(self.board_array[shot[1]][1][::2])
         pos[shot[0]-1] = icon
@@ -151,7 +149,6 @@ class Player:
         self.player_moves = []
 
     def define_ships(self, player_board, ships_settings):
-
         for s, l in ships_settings.items():
             temp_coordinates = []
             for n in range(l):
@@ -189,14 +186,14 @@ class Player:
         while True:
             print(f"Insert one coordinate (eg: 1, 1) to perform a shot")
             try:
-
                 if computer_coord == None:
                     coordinate = tuple(map(int, input().split(",")))
                 else:
-                    coordinate = computer_coord
-                    if coordinate in self.player_moves: #to avoid infinite loop when a random choice generates same coordinates
-                        print(f"DUPLICATE RANDOM CHOICE!!!!!!!!!!! {coordinate}")
+                    print("Computer move check")
+                    if computer_coord in self.player_moves: #to avoid infinite loop when a random choice generates same coordinates
                         coordinate = Game.machine_move()
+                    else:
+                        coordinate = computer_coord
 
                 if Game.check_input(coordinate):
                     #checks if shot was executed in previous moves
@@ -221,7 +218,6 @@ class Player:
                             break
                     else:
                         print("COORDINATE ALREADY USED!")
-
 
             except (ValueError, ValueError):
                 print(f"Inser comma separated integers. Value is not valid")
