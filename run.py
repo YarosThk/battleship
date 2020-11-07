@@ -39,8 +39,8 @@ def battleship():
         as is.
     '''
     player_board.render_board()
-    #player.define_ships(player_board, ships_settings)
-    player.auto_boat_input(player_ships, player_board)
+    player.define_ships(player_board, ships_settings)
+    #player.auto_boat_input(player_ships, player_board)
     player2.auto_boat_input(player2_ships, player2_board)
 
 
