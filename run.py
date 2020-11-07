@@ -1,6 +1,6 @@
 import string
 import random
-from main import Game, Board, Player
+from battleship.main import Game, Board, Player
 
 rows = 10
 columns = 10
